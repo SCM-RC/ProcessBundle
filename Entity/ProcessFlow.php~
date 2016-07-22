@@ -1,0 +1,65 @@
+<?php
+
+namespace SCM\ProcessBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProcessFlow
+ *
+ * @ORM\Table(name="process_flow")
+ * @ORM\Entity(repositoryClass="SCM\ProcessBundle\Repository\ProcessFlowRepository")
+ */
+class ProcessFlow
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var Process
+     * @ORM\ManyToOne(targetEntity="SCM\ProcessBundle\Entity\Process",inversedBy="flow")
+     */
+    private $process;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="processNode", type="string", length=255)
+     */
+    private $processNode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dataIn", type="object", nullable=true)
+     */
+    private $dataIn;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dataOut", type="object", nullable=true)
+     */
+    private $dataOut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime")
+     */
+    private $timestamp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="startedBy", type="string", length=255)
+     */
+    private $startedBy;
+    
+}

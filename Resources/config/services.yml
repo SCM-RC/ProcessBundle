@@ -1,0 +1,4 @@
+services:
+    scm_bp.processor:
+        class: SCM\ProcessBundle\Processors\FileProcessor
+        arguments: ['@service_container']

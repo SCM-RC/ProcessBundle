@@ -1,0 +1,206 @@
+<?php
+
+namespace SCM\ProcessBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Process
+ *
+ * @ORM\Table(name="process")
+ * @ORM\Entity(repositoryClass="SCM\ProcessBundle\Repository\ProcessRepository")
+ */
+class Process
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="startedBy", type="string", length=255)
+     */
+    private $startedBy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="startedAt", type="datetime")
+     */
+    private $startedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endedAt", type="datetime", nullable=true)
+     */
+    private $endedAt;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="SCM\ProcessBundle\Entity\ProcessFlow",mappedBy="process")
+     */
+    private $flow;
+    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Process
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set startedBy
+     *
+     * @param string $startedBy
+     *
+     * @return Process
+     */
+    public function setStartedBy($startedBy)
+    {
+        $this->startedBy = $startedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get startedBy
+     *
+     * @return string
+     */
+    public function getStartedBy()
+    {
+        return $this->startedBy;
+    }
+
+    /**
+     * Set startedAt
+     *
+     * @param \DateTime $startedAt
+     *
+     * @return Process
+     */
+    public function setStartedAt($startedAt)
+    {
+        $this->startedAt = $startedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get startedAt
+     *
+     * @return \DateTime
+     */
+    public function getStartedAt()
+    {
+        return $this->startedAt;
+    }
+
+    /**
+     * Set endedAt
+     *
+     * @param \DateTime $endedAt
+     *
+     * @return Process
+     */
+    public function setEndedAt($endedAt)
+    {
+        $this->endedAt = $endedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get endedAt
+     *
+     * @return \DateTime
+     */
+    public function getEndedAt()
+    {
+        return $this->endedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->flow = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add flow
+     *
+     * @param \SCM\ProcessBundle\Entity\ProcessFlow $flow
+     *
+     * @return Process
+     */
+    public function addFlow(\SCM\ProcessBundle\Entity\ProcessFlow $flow)
+    {
+        $this->flow[] = $flow;
+
+        return $this;
+    }
+
+    /**
+     * Remove flow
+     *
+     * @param \SCM\ProcessBundle\Entity\ProcessFlow $flow
+     */
+    public function removeFlow(\SCM\ProcessBundle\Entity\ProcessFlow $flow)
+    {
+        $this->flow->removeElement($flow);
+    }
+
+    /**
+     * Get flow
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFlow()
+    {
+        return $this->flow;
+    }
+}
